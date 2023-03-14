@@ -1,0 +1,13 @@
+#允许访问 接口开发文档
+swagger:
+  enable: true
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://172.20.54.135:3066/tmp
+    url: jdbc:mysql://192.168.139.128:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: jianhao
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

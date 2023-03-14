@@ -1,4 +1,4 @@
-package com.wjh.opratedb.generator;
+package com.jianhaoweb.generator;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -18,7 +18,7 @@ public class Generator {
      * Date 2023/3/6 17:02
      */
     public static void main(String[] args) {
-        FastAutoGenerator.create("jdbc:mysql://172.20.52.135:4000/jhtest", "root", "sailing")
+        FastAutoGenerator.create("jdbc:mysql://192.168.139.128:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false", "root", "jianhao")
                 .globalConfig(builder -> {
                     builder.author("wangjianhao") // 设置作者
                             .enableSwagger() // 开启 swagger 模式
@@ -26,22 +26,22 @@ public class Generator {
                             .outputDir((System.getProperty("user.dir")+"\\src\\main\\java")); // 指定输出目录
                 })
                 .packageConfig(builder -> {
-                    builder.parent("com.wjh") // 设置父包名
-                            .moduleName("opratedb") // 设置父包模块名
+                    builder.parent("com") // 设置父包名
+                            .moduleName("jianhaoweb") // 设置父包模块名
                             .entity("entity")
                             .service("service")
-                            .serviceImpl("serviceImpl")
+                            .serviceImpl("service.serviceImpl")
                             .controller("controller")
                             .mapper("mapper")
                             .xml("mapper")
                             .pathInfo(Collections.singletonMap(OutputFile.xml, System.getProperty("user.dir")+"\\src\\main\\resources\\mapper")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("test")// 设置需要生成的表名
+                    builder.addInclude("test1")// 设置需要生成的表名
 //                            .addTablePrefix("t_", "c_"); // 设置过滤表前缀
                             .serviceBuilder()
-                            .formatServiceFileName("%sService")
-                            .formatServiceImplFileName("%sServiceImpl")
+//                            .formatServiceFileName("%sService")
+//                            .formatServiceImplFileName("%sServiceImpl")
                             .entityBuilder()
                             .enableLombok()
                             .enableTableFieldAnnotation()
