@@ -4,10 +4,10 @@ swagger:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://172.20.54.135:3066/tmp
-    url: jdbc:mysql://192.168.139.128:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://172.20.52.135:4000/test?useUnicode=true&characterEncoding=utf8&useSSL=false&rewriteBatchedStatements=true
+#    url: jdbc:mysql://192.168.139.128:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
-    password: jianhao
+    password: sailing
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

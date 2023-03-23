@@ -19,7 +19,7 @@ import java.util.List;
  * @VERSON:1.8
  */
 @RestController
-@Api(tags = "测试" )
+
 public class TestController {
 
     @Autowired

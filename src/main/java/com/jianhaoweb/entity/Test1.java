@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,10 +18,9 @@ import lombok.Setter;
  * @author wangjianhao
  * @since 2023-03-14
  */
-@Getter
-@Setter
+@Data
 @TableName("test1")
-@ApiModel(value = "Test1对象", description = "")
+@ApiModel(value = "Test1对象", description = "aaaaaaaaaaaa")
 public class Test1 implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,6 +31,6 @@ public class Test1 implements Serializable {
     @TableField("name")
     private String name;
 
-    @TableField("json")
-    private String json;
+//    @TableField("json")
+//    private String json;
 }

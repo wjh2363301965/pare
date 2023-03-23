@@ -12,5 +12,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-03-14
  */
 public interface Test1Service extends IService<Test1> {
-
+/**
+ * Description 批量插入数据
+ * @param
+ * @return
+ * @author jianhao
+ * Date 2023/3/16 17:07
+ */
+    void insert10000();
 }
