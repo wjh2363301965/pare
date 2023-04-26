@@ -70,7 +70,7 @@
             <version>1.9.6</version>
         </dependency>
 
-       <!--swagger相关↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
+        <!--swagger相关↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
         <!--mybatis-plus相关  begin-->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -115,18 +115,79 @@
             <scope>test</scope>
         </dependency>
         <!--web工程的springboot项目初始自带这三个依赖，如果是jar工程，目前不确定有没有web这个依赖  end-->
-
+        <!--mysql数据库驱动↓↓↓↓↓↓↓↓↓↓-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.49</version>
         </dependency>
+        <!--mysql数据库驱动↑↑↑↑↑↑↑↑↑↑↑-->
+        <!--下面是pg数据库驱动↓↓↓↓↓↓↓↓↓↓-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.26</version>
+        </dependency>
+        <!--上面是pg数据库驱动↑↑↑↑↑↑↑↑↑↑↑-->
+        <!--下面是Dremio数据库驱动↓↓↓↓↓↓↓↓↓↓-->
+        <dependency>
+            <groupId>com.dremio.jdbc</groupId>
+            <artifactId>dremio-jdbc-driver</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <!-- 神通数据库驱动 -->
+        <dependency>
+            <groupId>com.oscar</groupId>
+            <artifactId>oscar</artifactId>
+            <version>7.0.8</version>
+        </dependency>
+        <!-- 神通数据库驱动 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+        <!-- oracle数据库驱动 -->
+        <dependency>
+            <groupId>com.oracle.ojdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>19.3.0.0</version>
+        </dependency>
+        <!-- sqlserver数据库驱动 -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>7.2.1.jre8</version>
+        </dependency>
+        <!-- gbase8s 8.8 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
+        <dependency>
+            <groupId>com.gbasedbt.jdbc</groupId>
+            <artifactId>gbasedbtjdbc</artifactId>
+            <version>3.2.0_6P</version>
+        </dependency>
+        <!-- gbase8s 8.8 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
+        <!-- openGauss ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
+        <dependency>
+            <groupId>org.opengauss</groupId>
+            <artifactId>opengauss-jdbc</artifactId>
+            <version>3.1.0-og</version>
+        </dependency>
+        <!-- openGauss ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
+        <!-- 瀚高数据库 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
+          <!--  <dependency>
+                <groupId>com.highgo</groupId>
+                <artifactId>HgdbJdbc</artifactId>
+                <version>6.2.3</version>
+            </dependency>-->
+        <!-- 瀚高数据库 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
+        <!-- 高斯100 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
+        <dependency>
+            <groupId>com.huawei.gauss.jdbc</groupId>
+            <artifactId>ZenithDriver-GaussDB</artifactId>
+            <version>100_1.0.1.SPC2.B003</version>
+        </dependency>
+        <!-- 高斯100 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
         <!--<dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
