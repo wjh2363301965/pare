@@ -1,11 +1,9 @@
 package com.jianhaoweb.play;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.util.Random;
 
 public class DinoGame {
@@ -13,6 +11,7 @@ public class DinoGame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame(" ");
+            frame.setUndecorated(true);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setContentPane(new GamePanel());
             frame.pack();
@@ -45,16 +44,48 @@ public class DinoGame {
         public GamePanel() {
             setPreferredSize(new Dimension(300, 150));
             setBackground(Color.WHITE);
+            setBorder(new LineBorder(Color.WHITE, 2));
             setFocusable(true);
             addKeyListener(this);
             timer = new Timer(20, this);
             timer.start();
-            restartButton = new JButton(".");
+           /* restartButton = new JButton(".");
             restartButton.addActionListener(e -> restartGame());
             restartButton.setVisible(false);
-            add(restartButton);
-
+            add(restartButton);*/
             random = new Random();
+
+            // 添加鼠标事件监听器
+            MouseAdapter mouseAdapter = new MouseAdapter() {
+                private Point initialClick;
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    initialClick = e.getPoint();
+                    getComponentAt(initialClick);
+                }
+
+                @Override
+                public void mouseDragged(MouseEvent e) {
+                    // 当前位置
+                    int thisX = getTopLevelAncestor().getLocation().x;
+                    int thisY = getTopLevelAncestor().getLocation().y;
+
+                    // 移动距离
+                    int xMoved = e.getX() - initialClick.x;
+                    int yMoved = e.getY() - initialClick.y;
+
+                    // 新位置
+                    int newX = thisX + xMoved;
+                    int newY = thisY + yMoved;
+
+                    // 移动窗口
+                    getTopLevelAncestor().setLocation(newX, newY);
+                }
+            };
+
+            addMouseListener(mouseAdapter);
+            addMouseMotionListener(mouseAdapter);
         }
 
         @Override
@@ -77,18 +108,18 @@ public class DinoGame {
             /*g.setColor(Color.LIGHT_GRAY);
 
             g.fillRect(dinoX, dinoY, dinoWidth, dinoHeight);*/
-            g2d.setColor(Color.LIGHT_GRAY);
+            g2d.setColor(new Color(250,250,250));
             g2d.fillRect(dinoX, dinoY, dinoWidth, dinoHeight);
             // 绘制障碍物
           /*  g.setColor(Color.LIGHT_GRAY);
             g.fillRect(obstacleX, obstacleY, obstacleWidth, obstacleHeight);*/
-            g2d.setColor(Color.LIGHT_GRAY);
+            g2d.setColor(new Color(250,250,250));
             g2d.fillRect(obstacleX, obstacleY, obstacleWidth, obstacleHeight);
             // 绘制得分
           /*  g.setColor(Color.LIGHT_GRAY);
             g.drawString("Score: " + score, 10, 20);*/
 
-            g.setColor(Color.LIGHT_GRAY);
+            g.setColor(new Color(220,220,220));
             g.drawString("Score: " + score, 10, 20);
             g2d.dispose();
         }
@@ -100,7 +131,7 @@ public class DinoGame {
             if (obstacleX < -obstacleWidth) {
                 obstacleX = 250;
                 obstacleY = 6;
-                obstacleHeight = 30 + random.nextInt(30);
+                obstacleHeight = 10 + random.nextInt(20);
                 score++; // 恐龙跳过障碍物时加一分
                 // 每过5分，增加障碍物速度.当速度==一定数后，不加速了
                 if (score % 5 == 0 && obstacleSpeed <30) {
@@ -111,11 +142,11 @@ public class DinoGame {
             // 更新恐龙跳跃
             if (isJumping) {
                 if (jumpStep <= jumpHeight) {
-                    dinoY += 2;
-                    jumpStep += 2;
+                    dinoY += obstacleSpeed-1;
+                    jumpStep += obstacleSpeed-1;
                 } else if (jumpStep < jumpHeight * 2) {
-                    dinoY -= 2;
-                    jumpStep += 2;
+                    dinoY -= obstacleSpeed-1;
+                    jumpStep += obstacleSpeed-1;
                 } else {
                     isJumping = false;
                     jumpStep = 0;
@@ -129,7 +160,7 @@ public class DinoGame {
             // 检测碰撞
             if (new Rectangle(dinoX, dinoY, dinoWidth, dinoHeight).intersects(new Rectangle(obstacleX, obstacleY, obstacleWidth, obstacleHeight))) {
                 timer.stop(); // 恐龙碰到障碍物，游戏结束
-                restartButton.setVisible(true);
+//                restartButton.setVisible(true);
             }
 
             repaint();
@@ -142,8 +173,11 @@ public class DinoGame {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_SPACE && !isJumping) {
+            if ((e.getKeyCode() == KeyEvent.VK_D||e.getKeyCode() == KeyEvent.VK_RIGHT) && !isJumping) {
                 isJumping = true;
+            }
+            if ((e.getKeyCode() == KeyEvent.VK_A||e.getKeyCode() == KeyEvent.VK_LEFT)&&!timer.isRunning()) {
+                    restartGame();
             }
         }
 
@@ -158,7 +192,7 @@ public class DinoGame {
             isJumping = false;
             jumpStep = 0;
             obstacleSpeed = 3;
-            restartButton.setVisible(false);
+//            restartButton.setVisible(false);
             timer.restart();
         }
     }
