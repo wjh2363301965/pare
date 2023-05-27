@@ -1,4 +1,4 @@
-package com.jianhaoweb.service;
+package com.jianhaoweb.service.wjh;
 
 import com.jianhaoweb.entity.Test1;
 import com.baomidou.mybatisplus.extension.service.IService;

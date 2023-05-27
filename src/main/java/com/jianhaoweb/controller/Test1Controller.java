@@ -1,17 +1,11 @@
 package com.jianhaoweb.controller;
 
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.jianhaoweb.entity.Bear;
-import com.jianhaoweb.entity.Test1;
-import com.jianhaoweb.mapper.Test1Mapper;
-import com.jianhaoweb.service.Test1Service;
+import com.jianhaoweb.service.wjh.Test1Service;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * <p>

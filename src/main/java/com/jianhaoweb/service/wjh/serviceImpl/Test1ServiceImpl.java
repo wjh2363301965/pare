@@ -1,8 +1,8 @@
-package com.jianhaoweb.service.serviceImpl;
+package com.jianhaoweb.service.wjh.serviceImpl;
 
 import com.jianhaoweb.entity.Test1;
 import com.jianhaoweb.mapper.Test1Mapper;
-import com.jianhaoweb.service.Test1Service;
+import com.jianhaoweb.service.wjh.Test1Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
