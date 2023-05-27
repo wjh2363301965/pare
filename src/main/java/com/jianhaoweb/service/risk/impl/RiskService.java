@@ -6,6 +6,9 @@ import com.jianhaoweb.service.risk.RiskSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 @Service
 @Slf4j
 public class RiskService  implements IRiskService {
@@ -20,17 +23,49 @@ public class RiskService  implements IRiskService {
         try {
             // 第一步：修改文件内容这一步已经测试通过
             RiskConfig conifg = new RiskConfig(riskSource);
-            conifg.writeDeConfig(logstashPath+"config/","a.txt");
+            conifg.writeDeConfig(logstashPath+"config/","mysql-ls.conf");
 
-            // 第二步：移动文件
-            moveFile(logstashPath + "config/a.txt", logstashPath + "config/b/a.txt");
+            // 第二步：结束logstash进程
+   /*         killLogstashProcess();
 
+            // 第三步：启动logstash
+            String command = logstashPath + "/bin/logstash -f config/mysql-ls.conf";
+            Process process = Runtime.getRuntime().exec(command);
+            process.waitFor();
+            int exitValue = process.exitValue();
+            if (exitValue != 0) {
+                throw new RuntimeException("Failed to start logstash, exit code: " + exitValue);
+            }*/
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return "Error occurred: " + e.getMessage();
         }
         return null;
     }
+
+    public void killLogstashProcess() {
+        try {
+            // 获取logstash的PID
+            Process process = Runtime.getRuntime().exec("pgrep -f logstash");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String pid = reader.readLine();
+
+            if (pid != null) {
+                // 结束logstash进程
+                String command = "kill " + pid;
+                process = Runtime.getRuntime().exec(command);
+                process.waitFor();
+                int exitValue = process.exitValue();
+                if (exitValue != 0) {
+                    throw new RuntimeException("Failed to kill logstash process, exit code: " + exitValue);
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error killing logstash process", e);
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public void moveFile(String sourcePath, String destinationPath) {
         try {

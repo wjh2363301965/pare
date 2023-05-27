@@ -34,7 +34,7 @@ public class RiskConfig {
     }
 
     private void generateInputConfig(StringBuffer sb){
-        sb.append("input{");
+        sb.append("input111{");
         sb.append(lineSeparator);
         sb.append("jdbc{");
         sb.append(lineSeparator);
