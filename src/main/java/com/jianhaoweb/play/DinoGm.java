@@ -5,8 +5,9 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
+import java.util.function.Function;
 
-public class DinoGame {
+public class DinoGm {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -39,7 +40,9 @@ public class DinoGame {
         private JButton restartButton;
         private Random random;
         private int obstacleSpeed = 3;
-
+        private boolean isSecondJumping  = false;
+        private int temp = 0;
+        private boolean isFalling = false;
 
         public GamePanel() {
             setPreferredSize(new Dimension(300, 150));
@@ -99,61 +102,66 @@ public class DinoGame {
             // 平移坐标系，使原点位于左下角
             g2d.translate(0, -getHeight());
 
-            // 在这里添加你的绘制代码，使用g2d对象
-            // 例如：g2d.drawRect(10, 10, 50, 50);
-
-
-
             // 绘制恐龙
-            /*g.setColor(Color.LIGHT_GRAY);
-
-            g.fillRect(dinoX, dinoY, dinoWidth, dinoHeight);*/
-            g2d.setColor(new Color(250,250,250));
+            g2d.setColor(new Color(250, 250, 250));
             g2d.fillRect(dinoX, dinoY, dinoWidth, dinoHeight);
             // 绘制障碍物
-          /*  g.setColor(Color.LIGHT_GRAY);
-            g.fillRect(obstacleX, obstacleY, obstacleWidth, obstacleHeight);*/
-            g2d.setColor(new Color(250,250,250));
+
+            g2d.setColor(new Color(250, 250, 250));
             g2d.fillRect(obstacleX, obstacleY, obstacleWidth, obstacleHeight);
             // 绘制得分
-          /*  g.setColor(Color.LIGHT_GRAY);
-            g.drawString("Score: " + score, 10, 20);*/
 
-            g.setColor(new Color(220,220,220));
-            g.drawString("Score: " + score, 10, 20);
+            g.setColor(new Color(220, 220, 220));
+            g.drawString("S: " + score, 10, 20);
             g2d.dispose();
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
             // 更新障碍物位置
-            obstacleX -=  obstacleSpeed;
+            obstacleX -= obstacleSpeed;
             if (obstacleX < -obstacleWidth) {
                 obstacleX = 250;
                 obstacleY = 6;
                 obstacleHeight = 10 + random.nextInt(20);
                 score++; // 恐龙跳过障碍物时加一分
                 // 每过5分，增加障碍物速度.当速度==一定数后，不加速了
-                if (score % 5 == 0 && obstacleSpeed <30) {
+                if (score % 5 == 0 && obstacleSpeed < 6) {
                     obstacleSpeed++;
                 }
             }
 
-            // 更新恐龙跳跃
+            // 更新跳跃
             if (isJumping) {
-                if (jumpStep <= jumpHeight) {
-                    dinoY += obstacleSpeed-1;
-                    jumpStep += obstacleSpeed-1;
-                } else if (jumpStep < jumpHeight * 2) {
-                    dinoY -= obstacleSpeed-1;
-                    jumpStep += obstacleSpeed-1;
+                if (isSecondJumping) {
+                    if (jumpStep < temp+jumpHeight) {
+                        dinoY += obstacleSpeed - 1;
+                        jumpStep += obstacleSpeed - 1;
+                    } else {
+                        dinoY -= obstacleSpeed - 1;
+                        jumpStep += obstacleSpeed - 1;
+                        if (dinoY <= 6) {
+                            dinoY = 6;
+                            isSecondJumping = false;
+                            isJumping = false;
+                            jumpStep = 0;
+                            isFalling = false;
+                        }
+                    }
                 } else {
-                    isJumping = false;
-                    jumpStep = 0;
-                }
-                // 如果跳跃结束后，恐龙的位置低于起始高度，将其设置为起始高度
-                if (!isJumping && dinoY > 6) {
-                    dinoY = 6;
+                    if (jumpStep < jumpHeight) {
+                        dinoY += obstacleSpeed - 1;
+                        jumpStep += obstacleSpeed - 1;
+                    } else {
+                        dinoY -= obstacleSpeed - 1;
+                        jumpStep += obstacleSpeed - 1;
+                        if (dinoY <= 6) {
+                            dinoY = 6;
+                            isJumping = false;
+                            jumpStep = 0;
+                            isFalling = true;
+                        }
+                    }
                 }
             }
 
@@ -169,30 +177,42 @@ public class DinoGame {
         }
 
         @Override
-        public void keyTyped(KeyEvent e) {}
+        public void keyTyped(KeyEvent e) {
+        }
 
         @Override
         public void keyPressed(KeyEvent e) {
-            if ((e.getKeyCode() == KeyEvent.VK_D||e.getKeyCode() == KeyEvent.VK_RIGHT) && !isJumping) {
+            if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) && !isJumping && !isFalling && dinoY == 6) {
                 isJumping = true;
+                isFalling = false;
+            } else if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) && isJumping && !isSecondJumping && !isFalling) {
+                isSecondJumping = true;
+                temp = dinoY;
+                isFalling = false;
             }
-            if ((e.getKeyCode() == KeyEvent.VK_A||e.getKeyCode() == KeyEvent.VK_LEFT)&&!timer.isRunning()) {
-                    restartGame();
+
+            if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) && !timer.isRunning()) {
+                restartGame();
             }
         }
 
         @Override
-        public void keyReleased(KeyEvent e) {}
+        public void keyReleased(KeyEvent e) {
+        }
 
         private void restartGame() {
             dinoY = 6;
             obstacleX = 250;
-            obstacleY = 6 ;
+            obstacleY = 6;
             score = 0;
             isJumping = false;
             jumpStep = 0;
             obstacleSpeed = 3;
-//            restartButton.setVisible(false);
+            isSecondJumping = false;
+            temp = 0;
+            isFalling = false; // 重置 isFalling 状态
+            //doubleJumpStep = 0;
+            //restartButton.setVisible(false);
             timer.restart();
         }
     }

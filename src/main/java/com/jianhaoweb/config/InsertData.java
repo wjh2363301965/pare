@@ -1,5 +1,14 @@
 package com.jianhaoweb.config;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.AbstractBeanFactory;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.core.io.Resource;
+
 import java.sql.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -69,13 +78,13 @@ public class InsertData {
     public static void main(String[] args) {
 
         //mysql链接
-//        String url = "jdbc:mysql://172.20.54.221:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&rewriteBatchedStatements=true";
+        String url = "jdbc:mysql://172.20.51.221:3306/mysql?useSSL=false";
         //pg数据库
 //        String url = "jdbc:postgresql://172.20.54.215:5432/test";
         //神通数据库
 //        String url = "jdbc:oscar://172.20.54.126:2003/OSRDB";
         //oracle数据库
-//        String url = "jdbc:oracle:thin:@172.20.54.20:1521/orcl";
+//        String url = "jdbc:oracle:thin:@172.20.52.10:1521/orcl";
         //南大GBase8S
 //        String url = "jdbc:gbasedbt-sqli://172.20.52.50:9088/testdb:GBASEDBTSERVER=gbase01";
         //华为openAauss
@@ -83,15 +92,15 @@ public class InsertData {
         //sqlServer
 //        String url = "jdbc:sqlserver://172.20.54.225:1433;databaseName=master";
         //瀚高数据库
-        String url = "jdbc:postgresql://172.20.52.135:5866/test";
+//        String url = "jdbc:postgresql://172.20.52.135:5866/test";
         //高斯100
 //        String url = "jdbc:zenith:@172.20.54.20:1888";
 
-        String user = "highgo";
-//        String user = "highgo";
+//        String user = "dscg";
+        String user = "root";
 //        DriverManager.setLoginTimeout(60);
 //        String password = "szoscar55";
-        String password = "Sailing2018@";
+        String password = "jianhao";
         Properties props = new Properties();
         props.setProperty("user",user);
         props.setProperty("password",password );
@@ -102,8 +111,8 @@ public class InsertData {
 //            Class.forName("com.gbasedbt.jdbc.Driver");
 //            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 //            Class.forName("oracle.jdbc.OracleDriver");
-//            Class.forName("com.mysql.jdbc.Driver");
-            Class.forName("org.postgresql.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
+//            Class.forName("org.postgresql.Driver");
 //            Class.forName("com.oscar.Driver");
 //            Class.forName("org.opengauss.Driver");
 //            Class.forName("com.highgo.jdbc.Driver");
@@ -151,6 +160,7 @@ public class InsertData {
             }
             System.out.println("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑sysSchemas↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
 */
+            Long start=System.currentTimeMillis();
             System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓getTables↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
             ResultSet rs = md.getTables(null, null, null, null);
 
@@ -170,6 +180,7 @@ public class InsertData {
 
             }
             System.out.println("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑getTables↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+            Long end=System.currentTimeMillis();
 
 /*             System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓getColumns↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
            ResultSet columns = md.getColumns(null, null, null, null);
@@ -201,7 +212,7 @@ public class InsertData {
                       System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>getColumns<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
     }
             System.out.println("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑getColumns↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");*/
-    /*        String query = "SELECT * FROM  \"DSCG_TEST\"  limit 1 ";
+         /*   String query = "SELECT * FROM \"public\".\"dscg_test\"  LIMIT 1 ";
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -209,7 +220,7 @@ public class InsertData {
                 ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
                 int columnCount = resultSetMetaData.getColumnCount();
             }*/
-
+            System.out.println((end-start)/1000);
 
         } catch (Exception e) {
             e.printStackTrace();
