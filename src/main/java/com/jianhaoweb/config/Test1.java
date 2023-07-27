@@ -13,10 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class Test1 {
 
     public static void main(String[] args) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
-        Instant instant = Instant.now();
-        LocalDateTime ldt = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-        String timestamp = ldt.format(formatter);
-        System.out.println(timestamp);
+        System.out.println(LevelEnum.CORE_DATA.getValue());
+        System.out.println(LevelEnum.CORE_DATA.getName());
     }
 }

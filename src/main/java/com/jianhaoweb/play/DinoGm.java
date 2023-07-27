@@ -5,7 +5,6 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
-import java.util.function.Function;
 
 public class DinoGm {
 
@@ -40,7 +39,7 @@ public class DinoGm {
         private JButton restartButton;
         private Random random;
         private int obstacleSpeed = 3;
-        private boolean isSecondJumping  = false;
+        private boolean isSecondJumping = false;
         private int temp = 0;
         private boolean isFalling = false;
 
@@ -134,7 +133,7 @@ public class DinoGm {
             // 更新跳跃
             if (isJumping) {
                 if (isSecondJumping) {
-                    if (jumpStep < temp+jumpHeight) {
+                    if (jumpStep < temp + jumpHeight) {
                         dinoY += obstacleSpeed - 1;
                         jumpStep += obstacleSpeed - 1;
                     } else {
