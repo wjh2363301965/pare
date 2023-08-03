@@ -17,7 +17,6 @@ class DinoGmTest {
     void mainSetsGameFrameToNonResizable() {
         gameFrame = mock(DinoGm.class);
         DinoGm.main(new String[]{});
-
         verify(gameFrame).setResizable(false);
     }
 

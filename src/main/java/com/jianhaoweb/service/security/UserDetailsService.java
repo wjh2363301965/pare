@@ -1,7 +1,7 @@
 package com.jianhaoweb.service.security;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+/*import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
 
 /**
  * @Auther:剑豪
@@ -11,6 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface UserDetailsService {
 
-    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+//    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 
 }

@@ -39,9 +39,6 @@ public class DinoGm {
         private JButton restartButton;
         private Random random;
         private int obstacleSpeed = 3;
-        private boolean isSecondJumping = false;
-        private int temp = 0;
-        private boolean isFalling = false;
 
         public GamePanel() {
             setPreferredSize(new Dimension(300, 150));
@@ -51,7 +48,7 @@ public class DinoGm {
             addKeyListener(this);
             timer = new Timer(20, this);
             timer.start();
-           /* restartButton = new JButton(".");
+            /* restartButton = new JButton(".");
             restartButton.addActionListener(e -> restartGame());
             restartButton.setVisible(false);
             add(restartButton);*/
@@ -125,41 +122,23 @@ public class DinoGm {
                 obstacleHeight = 10 + random.nextInt(20);
                 score++; // 恐龙跳过障碍物时加一分
                 // 每过5分，增加障碍物速度.当速度==一定数后，不加速了
-                if (score % 5 == 0 && obstacleSpeed < 6) {
+                if (score % 5 == 0 && obstacleSpeed < 7) {
                     obstacleSpeed++;
                 }
             }
 
             // 更新跳跃
             if (isJumping) {
-                if (isSecondJumping) {
-                    if (jumpStep < temp + jumpHeight) {
-                        dinoY += obstacleSpeed - 1;
-                        jumpStep += obstacleSpeed - 1;
-                    } else {
-                        dinoY -= obstacleSpeed - 1;
-                        jumpStep += obstacleSpeed - 1;
-                        if (dinoY <= 6) {
-                            dinoY = 6;
-                            isSecondJumping = false;
-                            isJumping = false;
-                            jumpStep = 0;
-                            isFalling = false;
-                        }
-                    }
+                if (jumpStep < jumpHeight) {
+                    dinoY += obstacleSpeed - 1;
+                    jumpStep += obstacleSpeed - 1;
                 } else {
-                    if (jumpStep < jumpHeight) {
-                        dinoY += obstacleSpeed - 1;
-                        jumpStep += obstacleSpeed - 1;
-                    } else {
-                        dinoY -= obstacleSpeed - 1;
-                        jumpStep += obstacleSpeed - 1;
-                        if (dinoY <= 6) {
-                            dinoY = 6;
-                            isJumping = false;
-                            jumpStep = 0;
-                            isFalling = true;
-                        }
+                    dinoY -= obstacleSpeed - 1;
+                    jumpStep += obstacleSpeed - 1;
+                    if (dinoY <= 6) {
+                        dinoY = 6;
+                        isJumping = false;
+                        jumpStep = 0;
                     }
                 }
             }
@@ -171,8 +150,6 @@ public class DinoGm {
             }
 
             repaint();
-
-
         }
 
         @Override
@@ -181,13 +158,8 @@ public class DinoGm {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) && !isJumping && !isFalling && dinoY == 6) {
+            if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) && !isJumping && dinoY == 6) {
                 isJumping = true;
-                isFalling = false;
-            } else if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) && isJumping && !isSecondJumping && !isFalling) {
-                isSecondJumping = true;
-                temp = dinoY;
-                isFalling = false;
             }
 
             if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) && !timer.isRunning()) {
@@ -207,11 +179,6 @@ public class DinoGm {
             isJumping = false;
             jumpStep = 0;
             obstacleSpeed = 3;
-            isSecondJumping = false;
-            temp = 0;
-            isFalling = false; // 重置 isFalling 状态
-            //doubleJumpStep = 0;
-            //restartButton.setVisible(false);
             timer.restart();
         }
     }
