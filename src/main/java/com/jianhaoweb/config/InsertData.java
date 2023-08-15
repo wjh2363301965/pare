@@ -10,11 +10,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.Resource;
 
 import java.sql.*;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Properties;
-import java.util.Random;
-
+import java.util.*;
 
 
 public class InsertData {
@@ -76,15 +72,16 @@ public class InsertData {
     }*/
 
     public static void main(String[] args) {
+        HashMap<String,String>  ak = new HashMap<>();
 
         //mysql链接
-        String url = "jdbc:mysql://172.20.51.221:3306/mysql?useSSL=false";
+//        String url = "jdbc:mysql://172.20.51.221:3306/mysql?useSSL=false";
         //pg数据库
 //        String url = "jdbc:postgresql://172.20.54.215:5432/test";
         //神通数据库
 //        String url = "jdbc:oscar://172.20.54.126:2003/OSRDB";
         //oracle数据库
-//        String url = "jdbc:oracle:thin:@172.20.52.10:1521/orcl";
+        String url = "jdbc:oracle:thin:@172.20.52.135:1521/XE";
         //南大GBase8S
 //        String url = "jdbc:gbasedbt-sqli://172.20.52.50:9088/testdb:GBASEDBTSERVER=gbase01";
         //华为openAauss
@@ -97,10 +94,10 @@ public class InsertData {
 //        String url = "jdbc:zenith:@172.20.54.20:1888";
 
 //        String user = "dscg";
-        String user = "root";
+        String user = "sys as sysdba";
 //        DriverManager.setLoginTimeout(60);
 //        String password = "szoscar55";
-        String password = "jianhao";
+        String password = "sailing";
         Properties props = new Properties();
         props.setProperty("user",user);
         props.setProperty("password",password );
@@ -110,8 +107,8 @@ public class InsertData {
             // 加载驱动
 //            Class.forName("com.gbasedbt.jdbc.Driver");
 //            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//            Class.forName("oracle.jdbc.OracleDriver");
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("oracle.jdbc.OracleDriver");
+//            Class.forName("com.mysql.jdbc.Driver");
 //            Class.forName("org.postgresql.Driver");
 //            Class.forName("com.oscar.Driver");
 //            Class.forName("org.opengauss.Driver");

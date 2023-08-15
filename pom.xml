@@ -149,17 +149,17 @@
         </dependency>
         <!--上面是pg数据库驱动↑↑↑↑↑↑↑↑↑↑↑-->
         <!--下面是Dremio数据库驱动↓↓↓↓↓↓↓↓↓↓-->
-        <dependency>
+  <!--      <dependency>
             <groupId>com.dremio.jdbc</groupId>
             <artifactId>dremio-jdbc-driver</artifactId>
             <version>4.1.2</version>
-        </dependency>
+        </dependency>-->
         <!-- 神通数据库驱动 -->
-        <dependency>
+   <!--     <dependency>
             <groupId>com.oscar</groupId>
             <artifactId>oscar</artifactId>
             <version>7.0.8</version>
-        </dependency>
+        </dependency>-->
         <!-- 神通数据库驱动 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -180,18 +180,18 @@
             <version>7.2.1.jre8</version>
         </dependency>
         <!-- gbase8s 8.8 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
-        <dependency>
+    <!--    <dependency>
             <groupId>com.gbasedbt.jdbc</groupId>
             <artifactId>gbasedbtjdbc</artifactId>
             <version>3.2.0_6P</version>
-        </dependency>
+        </dependency>-->
         <!-- gbase8s 8.8 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
         <!-- openGauss ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
-        <dependency>
+ <!--       <dependency>
             <groupId>org.opengauss</groupId>
             <artifactId>opengauss-jdbc</artifactId>
             <version>3.1.0-og</version>
-        </dependency>
+        </dependency>-->
         <!-- openGauss ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
         <!-- 瀚高数据库 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
           <!--  <dependency>
@@ -201,11 +201,11 @@
             </dependency>-->
         <!-- 瀚高数据库 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
         <!-- 高斯100 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
-        <dependency>
+<!--        <dependency>
             <groupId>com.huawei.gauss.jdbc</groupId>
             <artifactId>ZenithDriver-GaussDB</artifactId>
             <version>100_1.0.1.SPC2.B003</version>
-        </dependency>
+        </dependency>-->
         <!-- 高斯100 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->
         <!--<dependency>
             <groupId>com.mysql</groupId>
@@ -236,6 +236,13 @@
             <optional>true</optional>
         </dependency>
         <!--   注解处理器1   相关  上面↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑  -->
+        <!--   FTP连接器↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓  -->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+        <!--  FTP连接器↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑  -->
     </dependencies>
 
     <build>
